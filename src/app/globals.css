@@ -279,3 +279,138 @@ button { font: inherit; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
 }
+
+
+/* Animate registered theme colors so the light/dark switch feels gradual. */
+@property --color-bg { syntax: "<color>"; inherits: true; initial-value: #f5f8fc; }
+@property --color-surface { syntax: "<color>"; inherits: true; initial-value: #ffffff; }
+@property --color-surface-soft { syntax: "<color>"; inherits: true; initial-value: #f0f5fb; }
+@property --color-border { syntax: "<color>"; inherits: true; initial-value: #e2e9f2; }
+@property --color-border-strong { syntax: "<color>"; inherits: true; initial-value: #c8d4e3; }
+@property --color-text-primary { syntax: "<color>"; inherits: true; initial-value: #142238; }
+@property --color-text-secondary { syntax: "<color>"; inherits: true; initial-value: #34445d; }
+@property --color-text-muted { syntax: "<color>"; inherits: true; initial-value: #596a83; }
+@property --color-accent { syntax: "<color>"; inherits: true; initial-value: #3f67e8; }
+@property --color-accent-hover { syntax: "<color>"; inherits: true; initial-value: #2d50ca; }
+@property --color-green { syntax: "<color>"; inherits: true; initial-value: #13a884; }
+
+:root {
+  transition:
+    --color-bg 360ms cubic-bezier(0.2, 0.75, 0.25, 1),
+    --color-surface 360ms cubic-bezier(0.2, 0.75, 0.25, 1),
+    --color-surface-soft 360ms cubic-bezier(0.2, 0.75, 0.25, 1),
+    --color-border 360ms cubic-bezier(0.2, 0.75, 0.25, 1),
+    --color-border-strong 360ms cubic-bezier(0.2, 0.75, 0.25, 1),
+    --color-text-primary 360ms cubic-bezier(0.2, 0.75, 0.25, 1),
+    --color-text-secondary 360ms cubic-bezier(0.2, 0.75, 0.25, 1),
+    --color-text-muted 360ms cubic-bezier(0.2, 0.75, 0.25, 1),
+    --color-accent 360ms cubic-bezier(0.2, 0.75, 0.25, 1),
+    --color-accent-hover 360ms cubic-bezier(0.2, 0.75, 0.25, 1),
+    --color-green 360ms cubic-bezier(0.2, 0.75, 0.25, 1);
+}
+
+.scroll-reveal {
+  min-width: 0;
+  opacity: 1;
+  transform: none;
+}
+.scroll-reveal.reveal-pending:not(.is-visible) {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 520ms cubic-bezier(0.2, 0.75, 0.25, 1) var(--reveal-delay, 0ms),
+    transform 520ms cubic-bezier(0.2, 0.75, 0.25, 1) var(--reveal-delay, 0ms);
+}
+.scroll-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 520ms cubic-bezier(0.2, 0.75, 0.25, 1) var(--reveal-delay, 0ms),
+    transform 520ms cubic-bezier(0.2, 0.75, 0.25, 1) var(--reveal-delay, 0ms);
+}
+
+.project-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin: -5px 0 15px;
+}
+.project-filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 7px;
+}
+.filter-button {
+  display: inline-flex;
+  min-height: 32px;
+  align-items: center;
+  gap: 7px;
+  padding: 0 10px;
+  cursor: pointer;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--color-surface) 75%, transparent);
+  color: var(--color-text-muted);
+  font-size: 11px;
+  font-weight: 580;
+  transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease, transform 180ms ease;
+}
+.filter-button:hover {
+  transform: translateY(-1px);
+  border-color: color-mix(in srgb, var(--color-accent) 35%, var(--color-border));
+  color: var(--color-accent);
+}
+.filter-button.is-active {
+  border-color: color-mix(in srgb, var(--color-accent) 35%, var(--color-border));
+  background: color-mix(in srgb, var(--color-accent) 9%, var(--color-surface));
+  color: var(--color-accent-hover);
+}
+.filter-button:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--color-accent) 55%, transparent);
+  outline-offset: 3px;
+}
+.filter-count {
+  display: grid;
+  min-width: 17px;
+  height: 17px;
+  place-items: center;
+  padding-inline: 4px;
+  border-radius: 999px;
+  background: color-mix(in srgb, currentColor 10%, transparent);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  line-height: 1;
+}
+.project-count { white-space: nowrap; }
+.project-grid { align-items: stretch; }
+.project-reveal { display: flex; }
+.project-reveal > .project-card { width: 100%; }
+.project-card {
+  transform-origin: center bottom;
+  transition: transform 260ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    border-color 220ms ease, box-shadow 260ms ease, background-color 260ms ease;
+}
+.project-card:hover { transform: translateY(-4px) scale(1.006); }
+.project-card:active { transform: translateY(-1px) scale(0.998); }
+.project-card:hover .project-arrow { transform: translate(1px, -1px); }
+.project-arrow { transition: color 180ms ease, background 180ms ease, border-color 180ms ease, transform 220ms ease; }
+.theme-toggle svg { transition: transform 260ms cubic-bezier(0.2, 0.8, 0.2, 1); }
+.theme-toggle:hover svg { transform: rotate(-12deg) scale(1.04); }
+
+@media (max-width: 680px) {
+  .project-toolbar { align-items: flex-start; flex-direction: column; gap: 10px; margin-top: -2px; }
+  .project-filters { gap: 6px; }
+  .filter-button { min-height: 34px; }
+  .project-grid { gap: 11px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .scroll-reveal.reveal-pending:not(.is-visible) {
+    opacity: 1;
+    transform: none;
+  }
+  .project-card:hover, .project-card:active, .filter-button:hover, .theme-toggle:hover {
+    transform: none;
+  }
+  .project-card:hover .project-arrow, .theme-toggle:hover svg { transform: none; }
+}

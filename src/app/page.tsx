@@ -1,6 +1,7 @@
-import { projects, site } from "@/data/projects";
+import { site } from "@/data/projects";
 import Hero from "@/components/Hero";
-import ProjectCard from "@/components/ProjectCard";
+import ProjectGrid from "@/components/ProjectGrid";
+import ScrollReveal from "@/components/ScrollReveal";
 import ThemeToggle from "@/components/ThemeToggle";
 
 export default function Home() {
@@ -35,29 +36,18 @@ export default function Home() {
       </header>
 
       <main id="main" className="content-shell">
-        <div className="hero-wrap">
+        <ScrollReveal className="hero-wrap">
           <Hero />
-        </div>
+        </ScrollReveal>
 
         <section id="projects" className="projects-section" aria-labelledby="projects-heading">
-          <div className="section-heading">
+          <ScrollReveal className="section-heading">
             <div>
               <p className="section-kicker"><span aria-hidden="true">{"//"}</span> A few things I&apos;ve made</p>
               <h2 id="projects-heading">Selected projects</h2>
             </div>
-            <span className="project-count"><strong>{String(projects.length).padStart(2, "0")}</strong> projects</span>
-          </div>
-          <div className="project-grid">
-            {projects.map((project, index) => (
-              <ProjectCard
-                key={project.name}
-                index={index + 1}
-                name={project.name}
-                description={project.description}
-                language={project.language}
-              />
-            ))}
-          </div>
+          </ScrollReveal>
+          <ProjectGrid />
         </section>
       </main>
 
