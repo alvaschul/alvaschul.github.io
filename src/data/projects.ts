@@ -21,11 +21,6 @@ export const projects: Project[] = [
     language: "Python",
   },
   {
-    name: "hermes-backup",
-    description: "Hermes Agent backup and configuration repository",
-    language: "Python",
-  },
-  {
     name: "badboy-barber-cloudflare",
     description: "Badboy Barber POS + Reports",
     language: "HTML",

@@ -1,6 +1,6 @@
 # alvaschul.github.io
 
-Personal developer portfolio built with Next.js 15, TypeScript, and Tailwind CSS 4. A single home page with an editorial hero (name, bio, GitHub link) and a grid of five project cards linking to GitHub repos. Dark theme by default, with a light/dark toggle. Statically exported to `out/` and deployed to GitHub Pages via GitHub Actions.
+Personal developer portfolio built with Next.js 15, TypeScript, and Tailwind CSS 4. A single home page with an editorial hero (name, bio, GitHub link) and a grid of five project cards linking to GitHub repos. Light theme by default, with a light/dark toggle. Statically exported to `out/` and deployed to GitHub Pages via GitHub Actions.
 
 ## Development
 
@@ -20,11 +20,11 @@ All page content is defined statically in `src/data/projects.ts`:
 
 New GitHub repos don't appear automatically — after creating a repo, add an entry to the `projects` array (and update `site` if needed), then rebuild.
 
-## Dark / Light Theme
+## Light / Dark Theme
 
-The site defaults to dark. The toggle in the top-right corner switches between dark and light by toggling the `dark` class on the root `<html>` element (class-based dark mode via Tailwind v4's `@custom-variant dark`).
+The site defaults to light. The toggle in the top-right corner switches between light and dark by toggling the `dark` class on the root `<html>` element (class-based dark mode via Tailwind v4's `@custom-variant dark`).
 
-The chosen theme is persisted in `localStorage` under the `theme` key, and an inline script in `src/app/layout.tsx` applies it before hydration to avoid a flash of the wrong theme. If `localStorage` is unavailable (private browsing, blocked cookies), the site falls back to dark and the toggle still works for the current session.
+The chosen theme is persisted in `localStorage` under the `theme` key, and an inline script in `src/app/layout.tsx` applies it before hydration to avoid a flash of the wrong theme. If `localStorage` is unavailable (private browsing, blocked cookies), the site falls back to light and the toggle still works for the current session.
 
 ## Build for Production
 
